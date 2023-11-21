@@ -24,12 +24,20 @@ function! s:detect_issues()
   while lnum <= line('$')
     call prop_clear(lnum)
     let line_text = getline(lnum)
-    let [issue_id, starts, ends] = matchstrpos(line_text, '#\d\{1,5\}')
-    let issue_id = substitute(issue_id, '#', '', '')
-    let title = get(s:issue_table, issue_id, '')
-    if title != ''
-      call prop_add(lnum, ends + 1, { 'text': ' ' .. title, 'type': s:issue_prop_name })
-    endif
+    let match_start_index = 0
+    while match_start_index >= 0
+      let [issue_id, starts, ends] = matchstrpos(line_text, '#\d\{1,5\}', match_start_index)
+      if issue_id != ''
+        let match_start_index = match_start_index + ends + 1
+        let issue_id = substitute(issue_id, '#', '', '')
+        let title = get(s:issue_table, issue_id, '')
+        if title != ''
+          call prop_add(lnum, ends + 1, { 'text': ' ' .. title, 'type': s:issue_prop_name })
+        endif
+      else
+        let match_start_index = -1
+      endif
+    endwhile
     let lnum = lnum + 1
   endwhile
 endfunction
