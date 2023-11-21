@@ -25,6 +25,7 @@ function! s:detect_issues()
     call prop_clear(lnum)
     let line_text = getline(lnum)
     let [issue_id, starts, ends] = matchstrpos(line_text, '#\d\{1,5\}')
+    let issue_id = substitute(issue_id, '#', '', '')
     let title = get(s:issue_table, issue_id, '')
     if title != ''
       call prop_add(lnum, ends + 1, { 'text': ' ' .. title, 'type': s:issue_prop_name })
