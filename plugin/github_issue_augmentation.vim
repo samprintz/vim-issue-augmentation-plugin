@@ -43,7 +43,7 @@ function! s:detect_issues()
 endfunction
 
 function! s:update_issue_titles()
-  call prop_type_add(s:issue_prop_name, { 'highlight': 'SpecialComment', 'priority': 10 })
+  call prop_type_add(s:issue_prop_name, { 'highlight': 'Comment', 'priority': 10 })
   call prop_clear(1, line('$'), { 'name': s:issue_prop_name })
 
   call s:load_issue_titles()
