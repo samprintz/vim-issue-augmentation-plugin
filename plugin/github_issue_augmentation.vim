@@ -20,8 +20,8 @@ function! s:load_issue_titles()
 endfunction
 
 function! s:detect_issues()
-  let lnum = 1
-  while lnum <= line('$')
+  let lnum = line('w0') " first visible line
+  while lnum <= line('w$') " last visible line
     call prop_clear(lnum)
     let line_text = getline(lnum)
     let match_start_index = 0
@@ -53,6 +53,7 @@ endfunction
 augroup detectIssues
   autocmd!
   autocmd BufEnter * call s:update_issue_titles()
+  autocmd CursorMoved,CursorMovedI * call s:detect_issues()
   autocmd TextChanged,TextChangedI * call s:detect_issues()
 augroup END
 
