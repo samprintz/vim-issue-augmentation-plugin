@@ -30,3 +30,5 @@ For the example above, it might look like this:
 5434,Some bug
 5435,Cool feature
 ```
+
+A node script to automatically fetch such a mapping file is provided in `util/fetch-issue-titles.js`.
