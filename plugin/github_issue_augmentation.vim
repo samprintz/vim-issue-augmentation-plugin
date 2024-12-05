@@ -11,7 +11,7 @@ function! s:load_issue_titles()
   if filereadable(file_path)
     let lines = readfile(file_path)
     for line in lines
-      let parts = split(line, ',')
+      let parts = split(line, '\t')
       let issue_id = parts[0]
       let title = parts[1]
       let s:issue_table[issue_id] = title
