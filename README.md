@@ -31,4 +31,4 @@ For the example above, it might look like this:
 5435,Cool feature
 ```
 
-A node script to automatically fetch such a mapping file is provided in `util/fetch-issue-titles.js`.
+A node script to automatically fetch such a mapping file is provided in https://github.com/samprintz/fetch-github-titles.
